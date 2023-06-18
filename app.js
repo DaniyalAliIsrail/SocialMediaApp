@@ -11,7 +11,7 @@ function signup() {
     userPassword,
   };
 
-  var getUser = JSON.parse(localStorage.getItem("user"));
+  var getUser = JSON.parse(localStorage.getItem("userskey"));
   console.log(getUser); // null return karay ga:
   //first time signup in this app
   // ap phlay khus naseeb user ho
@@ -19,7 +19,7 @@ function signup() {
   if (getUser == null) {
     var arr = [];
     arr.push(userObj);
-    localStorage.setItem("user", JSON.stringify(arr));
+    localStorage.setItem("userskey", JSON.stringify(arr));
   } else {
     /** Is line mein, getUser array par find method ko istemaal kiya gaya hai. find method array mein ek  (condition) ko pura karne wala ek element dhoondhta hai. Is case mein, ek function condition ke roop mein istemaal kiya gaya hai. Yeh function har ek element ke liye bulaaya jaata hai aur yeh dekhta hai ki kya abhi maujood element ka userEmail property userEmail variable ke barabar hai. Agar match mil jaata hai, toh function true return karta hai, aur woh element findUser variable mein assign ho jaata hai.**/
     var findUser = getUser.find(function (value) {
@@ -33,11 +33,34 @@ function signup() {
 
     if (findUser === undefined) {
       getUser.push(userObj);
-      localStorage.setItem("user", JSON.stringify(getUser));
+      localStorage.setItem("userskey", JSON.stringify(getUser));
       alert("Successfully Sign up");
       window.location.href = "./index.html";
     } else {
-      alert("Email are already Existing");
+      alert("Email already Existing");
     }
+  }
+}
+
+function login() {
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var getUser = JSON.parse(localStorage.getItem("userskey"));
+  console.log(getUser);
+
+  var user = getUser.findIndex(function (value) {
+    if(value.userEmail === email && value.userPassword === password)
+      return true;
+  });
+  // 
+  console.log(user)
+  if(user !== -1){
+    console.log("successful login");
+    alert("successfully login");
+    localStorage.setItem("loginUser",JSON.stringify(user))
+    window.location.replace("./dashboard.html");
+  }else{
+    // console.log("Email or password does not match");
+    alert("Email or password does not match");
   }
 }
