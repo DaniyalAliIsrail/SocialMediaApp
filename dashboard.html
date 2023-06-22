@@ -31,9 +31,22 @@
               <!-- title discription section -->
               <div class="MainSection">
                 <input type="text" id="title" placeholder="Post Title" class="form-control mx-auto w-50 mt-5 p-3 shadow-none">
-                <textarea placeholder="whats on your mind....." type="text" id="description" class="mx-auto w-50 mt-3 p-3  form-control shadow-none "></textarea>
+                <textarea placeholder="whats on your mind ?" type="text" id="description" class="mx-auto w-50 mt-3 p-3  form-control shadow-none "></textarea>
                 <button onclick="addPost()" class="buttonMain p-2 mt-2 " >Post</button>
               </div>
+              <!-- post create ui -->
+              <section id="listParent">
+                 <div class="card mx-auto w-50 mt-3" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <div class="d-flex justify-content-end p-4 g-5 shadow-none">
+                        <button class="btn btn-secondary">Edit Post</button>
+                       <button class="btn btn-info">Delete Post</button>
+                      </div>
+                  </div>
+                </div> 
+              </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
