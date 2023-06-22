@@ -16,7 +16,7 @@ body{
 }
 /* Main css */ 
 .wrapper{
-        padding: 0 0 100px;
+        padding: 0 0 60px;
         min-height: 100%; 
             
 }
@@ -38,4 +38,12 @@ body{
         padding: 15px;
         font-weight: 500;
         box-shadow: none;
+}
+.buttonMain{
+        width: 50%;
+        margin-left: 25%;
+        padding: 30px 0px;
+        background-color: orange;
+        color: white;
+        border: none;
 }

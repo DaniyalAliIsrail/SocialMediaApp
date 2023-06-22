@@ -1,3 +1,6 @@
+
+
+
 function signup() {
   var userName = document.getElementById("userfullName").value;
   var userContact = document.getElementById("userContact").value;
@@ -27,6 +30,7 @@ function signup() {
       if (value.userEmail === userEmail) {
         return true;
       }
+      console.log(value);
     });
 
     /**  Yeh if-else statement ko contain karte hain jismein findUser ki value ko check kiya jaata hai. Agar findUser undefined hai, toh iska matlab hai ki getUser array mein usi email ke saath koi user maujood nahi hai. Is case mein, code push method ka istemaal karke getUser array mein ek naya user object (userObj) daalta hai. Fir woh updated array ko browser ke local storage mein store karta hai aur "user signup" ka ek alert dikhaata hai. Akhir mein, woh user ko "index.html" page par redirect kar deta hai.**/
@@ -47,19 +51,22 @@ function login() {
   var password = document.getElementById("password").value;
   var getUser = JSON.parse(localStorage.getItem("userskey"));
   console.log(getUser);
-
   var user = getUser.findIndex(function (value) {
-    if(value.userEmail === email && value.userPassword === password)
+    console.log(value.userEmail);
+    // Find the index of the user in the getUser array
+    if (value.userEmail === email && value.userPassword === password)
       return true;
   });
-  // 
-  console.log(user)
-  if(user !== -1){
+  //
+  console.log(user);
+  // Check if the user was found (user index is not -1)
+  if (user !== -1) {
     console.log("successful login");
     alert("successfully login");
-    localStorage.setItem("loginUser",JSON.stringify(user))
+    // Store the logged-in user's index in localStorage
+    localStorage.setItem("loginUser", JSON.stringify(user));
     window.location.replace("./dashboard.html");
-  }else{
+  } else {
     // console.log("Email or password does not match");
     alert("Email or password does not match");
   }
