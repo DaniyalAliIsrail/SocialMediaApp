@@ -1,13 +1,33 @@
 var loginUser;
-window.addEventListener("load",function(){
+var listParent = document.getElementById("listparent");
+
+window.addEventListener("load", function () {
   console.log("hello world");
-  var getUser = JSON.parse(this.localStorage.getItem("loginUser"))
-  console.log("get user ",getUser);
-  loginUser=getUser
-  var fullName = this.document.getElementById("myName")
-  fullName.innerHTML="welcome"+" "+loginUser.userName;
+  var getUser = JSON.parse(this.localStorage.getItem("loginUser"));
+  console.log("get user ", getUser);
+  loginUser = getUser;
+  var fullName = this.document.getElementById("myName");
+  fullName.innerHTML = "welcome" + " " + loginUser.userName;
   // console.log(fullName);
-})
+
+  if (listParent) {
+    var getposts = JSON.parse(this.localStorage.getItem("posts"));
+    console.log(getposts);
+    for (const value of getposts) {
+      listParent.innerHTML += `<div id="main-card" class="card mx-auto w-50 mt-3">
+ <div id="main-card-body" class="card-body">
+   <h5 id="main-card-title" card-title>${value.title}</h5>
+   <p id="main-card-text" class="card-text">${value.desc}</p>
+     <div id="mainBtndiv" class="d-flex justify-content-end">
+       <button id="edit-btn" class="btn btn-secondary">Edit Post</button>
+      <button id="del-btn" class="btn btn-info">Delete Post</button>
+     </div>
+ </div>
+</div>`;
+      // console.log(value.title);
+    }
+  }
+});
 
 function signup() {
   var userName = document.getElementById("userfullName").value;
@@ -80,89 +100,86 @@ function login() {
     // console.log("Email or password does not match");
     alert("Email or password does not match");
   }
-  console.log("user",user);
+  console.log("user", user);
 }
 //! Dashboard javascript
-var listParent = document.getElementById("listparent")
-function addPost(){
-   var title = document.getElementById("tit")
-   var desc= document.getElementById("desc")
+function addPost() {
+  var title = document.getElementById("tit");
+  var desc = document.getElementById("desc");
+
   //create Element
-  var mainCardDiv=document.createElement("div")
-  var mainCardBody=document.createElement("div")
-  mainCardBody.classList.add("card-body","card")
-  
-  if(!title.value || !desc.value){
-    alert("please fill the input filled ")
-    return
+  //   var mainCardDiv=document.createElement("div")
+  //   var mainCardBody=document.createElement("div")
+  //   mainCardBody.classList.add("card-body","card")
+
+  if (!title.value || !desc.value) {
+    alert("please fill the input filled ");
+    return;
   }
-  //! card title
-  var cardTitle=document.createElement("h5")
-  mainCardBody.classList.add("card-body")
-  cardTitle.innerHTML=title.value;
-  mainCardBody.append(cardTitle)
-  //!card text
-  var cardText=document.createElement("p")
-  cardText.classList.add("card-text")
-  cardText.innerHTML=desc.value;
-  mainCardBody.append(cardText)
-//! Edit button
-  var mainBtnDiv =document.createElement("div")
-  var editBtn =document.createElement("button")
-  editBtn.classList.add("btn","btn-secondary")
-  editBtn.innerHTML="Edit Button"
-  mainBtnDiv.append(editBtn)
-  //! Del button
-  var delBtn =document.createElement("button")
-  delBtn.classList.add("btn","btn-info")
-  delBtn.innerHTML="Del Button";
-  mainBtnDiv.append(delBtn);
-  //main btn div append button  
-  mainCardBody.append(mainBtnDiv)
-  mainBtnDiv.classList.add("d-flex", "justify-content-end")
- //!main card div
- mainCardDiv.append(mainCardBody)
- mainCardDiv.classList.add("card," , "mx-auto", "w-50", "mt-3")
- //! maincard div append list parent section
- console.log(mainCardBody);
- listParent.append(mainCardDiv)
- console.log(mainCardBody);
+  //   //! card title
+  //   var cardTitle=document.createElement("h5")
+  //   mainCardBody.classList.add("card-body")
+  //   cardTitle.innerHTML=title.value;
+  //   mainCardBody.append(cardTitle)
+  //   //!card text
+  //   var cardText=document.createElement("p")
+  //   cardText.classList.add("card-text")
+  //   cardText.innerHTML=desc.value;
+  //   mainCardBody.append(cardText)
+  // //! Edit button
+  //   var mainBtnDiv =document.createElement("div")
+  //   var editBtn =document.createElement("button")
+  //   editBtn.classList.add("btn","btn-secondary")
+  //   editBtn.innerHTML="Edit Button"
+  //   mainBtnDiv.append(editBtn)
+  //   //! Del button
+  //   var delBtn =document.createElement("button")
+  //   delBtn.classList.add("btn","btn-info")
+  //   delBtn.innerHTML="Del Button";
+  //   mainBtnDiv.append(delBtn);
+  //   //main btn div append button
+  //   mainCardBody.append(mainBtnDiv)
+  //   mainBtnDiv.classList.add("d-flex", "justify-content-end")
+  //  //!main card div
+  //  mainCardDiv.append(mainCardBody)
+  //  mainCardDiv.classList.add("card," , "mx-auto", "w-50", "mt-3")
+  //  //! maincard div append list parent section
+  //  console.log(mainCardBody);
+  //  listParent.append(mainCardDiv)
+  //  console.log(mainCardBody);
 
+  //localStorage.setItem("Posts",JSON.stringify(postObj))
+  //  title.value=" ";
+  //  desc.value= " ";
+  var todoBox = `<div id="main-card" class="card mx-auto w-50 mt-3">
+ <div id="main-card-body" class="card-body">
+   <h5 id="main-card-title" card-title>${title.value}</h5>
+   <p id="main-card-text" class="card-text">${desc.value}</p>
+     <div id="mainBtndiv" class="d-flex justify-content-end">
+       <button id="edit-btn" class="btn btn-secondary">Edit Post</button>
+      <button id="del-btn" class="btn btn-info">Delete Post</button>
+     </div>
+ </div>
+</div>`;
+  listParent.innerHTML += todoBox;
 
- var postObj ={
-  title:title.value,
-  desc:desc.value
- }
-// user jo  card post kr raha hay .localstoraga may data save kr raha hay 
- var getPosts=JSON.parse(localStorage.getItem("posts"))
- console.log("getposts",getPosts);
- if(getPosts == null ){
-  var array =  []
-  array.unshift(postObj)
-  localStorage.setItem("posts",JSON.stringify(array))
- }
- else{
-getPosts.unshift(postObj)
-localStorage.setItem("posts",JSON.stringify(getPosts))
- }
+  var postObj = {
+    title: title.value,
+    desc: desc.value,
+  };
+  // user jo  card post kr raha hay .localstoraga may data save kr raha hay
+  var getPosts = JSON.parse(localStorage.getItem("posts"));
+  //  console.log("getposts",getPosts);
+  if (getPosts == null) {
+    var array = [];
+    array.unshift(postObj);
+    localStorage.setItem("posts", JSON.stringify(array));
+  } else {
+    getPosts.unshift(postObj);
+    localStorage.setItem("posts", JSON.stringify(getPosts));
+  }
 
- //localStorage.setItem("Posts",JSON.stringify(postObj))
- title.value=" ";
- desc.value= " ";
-
-  // back tick say  innexHtml  kr kay work nhy kr raha hay work nhy kr raha hay bqy pura string arha hay console pr  
-//  var todoBox =`<div id="listparent">
-//  <div id="main-card" class="card mx-auto w-50 mt-3">
-//  <div id="main-card-body" class="card-body">
-//    <h5 id="main-card-title" card-title>Title</h5>
-//    <p id="main-card-text" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//      <div id="mainBtndiv" class="d-flex justify-content-end">
-//        <button id="edit-btn" class="btn btn-secondary">Edit Post</button>
-//       <button id="del-btn" class="btn btn-info">Delete Post</button>
-//      </div>
-//  </div>
-// </div>
-// </div>`
-// // listParent.innerHTML=todoBox;
-// console.log(todoBox);
+  title.value = " ";
+  desc.value = " ";
+  console.log(todoBox);
 }
