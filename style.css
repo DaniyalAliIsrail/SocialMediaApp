@@ -39,6 +39,9 @@ body{
         font-weight: 500;
         box-shadow: none;
 }
+#main-card{
+        width: 18rem
+}
 .buttonMain{
         width: 50%;
         margin-left: 25%;
