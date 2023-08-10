@@ -89,7 +89,7 @@ function addPost() {
       
         var id;
         var getPosts = JSON.parse(localStorage.getItem("posts")) || [];
-        console.log("getPosts" + getPosts);
+        // console.log("getPosts" + getPosts);
         if(getPosts.length > 0){
           id=getPosts[0].id + 1
         }else{
@@ -174,7 +174,7 @@ function addPost() {
     
         var h5Title = e.parentNode.parentNode.firstElementChild;
         console.log("h5 tittle",h5Title );
-        var pDesc = e.parentNode.parentNode.children[1];
+        var pDesc = document.querySelector("p.card-text")
         console.log("pDesc",pDesc);
         h5Title.innerHTML = editTitle
         pDesc.innerHTML = editDesc
