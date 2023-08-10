@@ -152,7 +152,7 @@ function addPost() {
       
 
       //! edit function
-      function editPost() {
+      function editPost(id,e) {
         console.log("function run");
         var indexNum;
         var getPosts = JSON.parse(localStorage.getItem("posts"))
@@ -165,15 +165,17 @@ function addPost() {
         var editTitle = prompt("edit title", post.title)
         var editDesc = prompt("edit desc", post.desc)
         const editObj = {
-            id: post.id,
+            id:id,
             title: editTitle,
-            desc: editDesc
+            desc: editDesc,
         }
         getPosts.splice(indexNum, 1, editObj)
         localStorage.setItem("posts", JSON.stringify(getPosts))
     
-        var h5Title = e.parentNode.firstElementChild
-        var pDesc = e.parentNode.firstElementChild.nextElementSibling
+        var h5Title = e.parentNode.parentNode.firstElementChild;
+        console.log("h5 tittle",h5Title );
+        var pDesc = e.parentNode.parentNode.children[1];
+        console.log("pDesc",pDesc);
         h5Title.innerHTML = editTitle
         pDesc.innerHTML = editDesc
     
