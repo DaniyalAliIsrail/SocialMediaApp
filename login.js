@@ -1,4 +1,13 @@
-
+// *********************FOR CHECK USER IS LOGIN OR NOT**********************
+window.addEventListener("load", function () {
+  console.log(localStorage.getItem("loginUser"))
+  var userLogin = localStorage.getItem("loginUser")
+  if (userLogin) {
+      window.location.replace("./dashboard.html")
+      return
+  }
+})
+// ******************************************************
 
 
 
@@ -13,6 +22,15 @@ function login() {
     if (value.userEmail === email && value.userPassword === password)
       return true;
   });
+
+
+ // *******CHECK USER ARE NOT EQUAL TO FALSE VALUES*************************
+ if(!user){
+  alert("Crediential Error email and password not match")
+  return
+}
+// ***********************************************************************
+
   //
   console.log(user);
   // Check if the user was found (user index is not -1)
