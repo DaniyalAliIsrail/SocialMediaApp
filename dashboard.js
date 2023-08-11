@@ -4,11 +4,11 @@ var loginUser;
 window.addEventListener("load", function () {
 
         
-    var userLogin = localStorage.getItem("loginUser")
-    if (!userLogin) {
-        window.location.replace("./index.html")
-        return
-    }
+    // var userLogin = localStorage.getItem("loginUser")
+    // if (!userLogin) {
+    //     window.location.replace("./index.html")
+    //     return
+    // }
 
   // console.log("hello world");
   var getUser = JSON.parse(this.localStorage.getItem("loginUser"));
@@ -24,8 +24,10 @@ window.addEventListener("load", function () {
     for (var value of getposts) {
       listParent.innerHTML += `<div id="main-card" class="card mx-auto w-50 mt-3">
  <div id="main-card-body" class="card-body">
+ <div class="textWraper">
    <h5 id="main-card-title" card-title>${value.title}</h5>
    <p id="main-card-text" class="card-text">${value.desc}</p>
+   </div>
      <div id="mainBtndiv" class="d-flex justify-content-end">
        <button id="edit-btn" class="btn btn-secondary" onclick="editPost(${value.id} ,this)" >Edit Post</button>
       <button id="del-btn" class="btn btn-info" onclick="deletePost(${value.id},this)" >Delete Post</button>
@@ -97,8 +99,10 @@ function addPost() {
         }
         var todoBox = `<div id="main-card" class="card mx-auto w-50 mt-3">
        <div id="main-card-body" class="card-body">
-         <h5 id="main-card-title" card-title>${title.value}</h5>
+       <div class="textWraper">
+         <h5 id="main-card-title" class="card-title ">${title.value}</h5>
          <p id="main-card-text" class="card-text">${desc.value}</p>
+         </div>
            <div id="mainBtndiv" class="d-flex justify-content-end">
              <button id="edit-btn" class="btn btn-secondary onclick="editPost(${id},this)" ">Edit Post</button>
             <button id="del-btn" class="btn btn-info" onclick="deletePost(${id}, this)">Delete Post</button>
@@ -153,17 +157,25 @@ function addPost() {
 
       //! edit function
       function editPost(id,e) {
-        console.log("function run");
-        var indexNum;
-        var getPosts = JSON.parse(localStorage.getItem("posts"))
-        var post = getPosts.find(function (value, index) {
-            if (value.id === id) {
-                indexNum = index
-                return true
-            }
-        })
-        var editTitle = prompt("edit title", post.title)
+       
+      const parent = e.parentNode.parentNode
+      var indexNum;
+      var getPosts = JSON.parse(localStorage.getItem("posts"))
+      var post = getPosts.find(function (value, index) {
+          if (value.id === id) {
+              indexNum = index
+              return true
+          }
+      })
+      var editTitle = prompt("edit title", post.title)
         var editDesc = prompt("edit desc", post.desc)
+        if(!editTitle || !editDesc){
+          alert("fill all the fields")
+            return
+        }
+  
+     
+        
         const editObj = {
             id:id,
             title: editTitle,
@@ -171,12 +183,8 @@ function addPost() {
         }
         getPosts.splice(indexNum, 1, editObj)
         localStorage.setItem("posts", JSON.stringify(getPosts))
-    
-        var h5Title = e.parentNode.parentNode.firstElementChild;
-        console.log("h5 tittle",h5Title );
-        var pDesc = document.querySelector("p.card-text")
-        console.log("pDesc",pDesc);
-        h5Title.innerHTML = editTitle
-        pDesc.innerHTML = editDesc
+        
+        parent.querySelector(".textWraper").children[0].innerHTML = editTitle
+        parent.querySelector(".textWraper").children[1].innerHTML = editDesc
     
     }
