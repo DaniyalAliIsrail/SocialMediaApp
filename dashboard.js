@@ -25,7 +25,11 @@ window.addEventListener("load", function () {
       listParent.innerHTML += `<div id="main-card" class="card mx-auto w-50 mt-3">
  <div id="main-card-body" class="card-body">
  <div class="textWraper">
+<<<<<<< HEAD
    <h5 id="main-card-title" class="card-title">${value.title}</h5>
+=======
+   <h5 id="main-card-title" card-title>${value.title}</h5>
+>>>>>>> 4156f8f120787c15b6ae7446ba7331ad97683f1a
    <p id="main-card-text" class="card-text">${value.desc}</p>
    </div>
      <div id="mainBtndiv" class="d-flex justify-content-end">
@@ -100,7 +104,11 @@ function addPost() {
         var todoBox = `<div id="main-card" class="card mx-auto w-50 mt-3">
        <div id="main-card-body" class="card-body">
        <div class="textWraper">
+<<<<<<< HEAD
          <h5 id="main-card-title" class="card-title">${title.value}</h5>
+=======
+         <h5 id="main-card-title" class="card-title ">${title.value}</h5>
+>>>>>>> 4156f8f120787c15b6ae7446ba7331ad97683f1a
          <p id="main-card-text" class="card-text">${desc.value}</p>
          </div>
            <div id="mainBtndiv" class="d-flex justify-content-end">
@@ -157,6 +165,10 @@ function addPost() {
 
       //! edit function
       function editPost(id,e) {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> 4156f8f120787c15b6ae7446ba7331ad97683f1a
       const parent = e.parentNode.parentNode
       var indexNum;
       var getPosts = JSON.parse(localStorage.getItem("posts"))
@@ -173,6 +185,11 @@ function addPost() {
             return
         }
   
+<<<<<<< HEAD
+=======
+     
+        
+>>>>>>> 4156f8f120787c15b6ae7446ba7331ad97683f1a
         const editObj = {
             id:id,
             title: editTitle,
